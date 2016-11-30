@@ -7,7 +7,7 @@ module.exports = {
   description: '',
 
   availableOptions: [
-    { name: 'source-dir', type: String, default: 'src', aliases: ['sd'] },
+    { name: 'source-dir', type: String, default: '', aliases: ['sd'] },
     { name: 'prefix', type: String, default: 'app', aliases: ['p'] },
     { name: 'style', type: String, default: 'css' },
     { name: 'mobile', type: Boolean, default: false },
