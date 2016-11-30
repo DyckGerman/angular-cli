@@ -1,5 +1,5 @@
 import * as chalk from 'chalk';
-import InitCommand from './init';
+import InitCommand from './generate-lib-module';
 
 const Command = require('../ember-cli/lib/models/command');
 const Project = require('../ember-cli/lib/models/project');
@@ -18,7 +18,7 @@ const NewModuleCommand = Command.extend({
     { name: 'link-cli', type: Boolean, default: false, aliases: ['lc'] },
     { name: 'skip-npm', type: Boolean, default: false, aliases: ['sn'] },
     { name: 'skip-bower', type: Boolean, default: true, aliases: ['sb'] },
-    { name: 'skip-git', type: Boolean, default: false, aliases: ['sg'] },
+    { name: 'skip-git', type: Boolean, default: true, aliases: ['sg'] },
     { name: 'directory', type: String, aliases: ['dir'] },
     { name: 'source-dir', type: String, default: 'src', aliases: ['sd'] },
     { name: 'style', type: String, default: 'css' },

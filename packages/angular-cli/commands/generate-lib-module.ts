@@ -34,16 +34,13 @@ const LibModuleCommand: any = Command.extend({
   anonymousOptions: ['<glob-pattern>'],
 
   run: function (commandOptions: any, rawArgs: string[]) {
-    const packageName = rawArgs.shift();
-
-    if (!packageName) {
+    if (!commandOptions.name) {
       return Promise.reject(new SilentError(
         `The "ng ${this.name}" command requires a name argument to be specified. ` +
         `For more details, use "ng help".`));
     }
 
-    commandOptions.name = packageName;
-    commandOptions.directory = packageName;
+    commandOptions.directory = commandOptions.name;
 
     if (commandOptions.dryRun) {
       commandOptions.skipGit = true;
@@ -99,7 +96,7 @@ const LibModuleCommand: any = Command.extend({
 
     const project = this.project;
 
-    if (!packageName) {
+    if (!commandOptions.name) {
       const message = 'The `ng ' + this.name + '` command requires a ' +
         'package.json in current folder with name attribute or a specified name via arguments. ' +
         'For more details, use `ng help`.';
@@ -110,7 +107,7 @@ const LibModuleCommand: any = Command.extend({
     const blueprintOpts = {
       dryRun: commandOptions.dryRun,
       blueprint: 'libmodule',
-      rawName: packageName,
+      rawName: commandOptions.name,
       targetFiles: rawArgs || '',
       rawArgs: rawArgs.toString(),
       sourceDir: commandOptions.sourceDir,
@@ -123,9 +120,9 @@ const LibModuleCommand: any = Command.extend({
       ignoredUpdateFiles: ['favicon.ico']
     };
 
-    if (!validProjectName(packageName)) {
+    if (!validProjectName(commandOptions.name)) {
       return Promise.reject(
-        new SilentError('We currently do not support a name of `' + packageName + '`.'));
+        new SilentError('We currently do not support a name of `' + commandOptions.name + '`.'));
     }
 
     if (commandOptions.mobile) {
