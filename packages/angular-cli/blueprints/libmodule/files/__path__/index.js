@@ -1,1 +1,1 @@
-export * from './lib/__name__.module';
+export * from './lib/<%= dasherizedModuleName %>.module';
